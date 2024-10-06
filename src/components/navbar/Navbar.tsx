@@ -1,33 +1,43 @@
-import Image from 'next/image';
-import Link from 'next/link';
+import Link from "next/link";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import HamburgerMenu from "./HamburgerMenu";
+import { IRoute } from "../../interface/IRoute";
+
+const Routes: IRoute[] = [
+  { name: "Accueil", path: "/" },
+  { name: "Zibnews", path: "/zibnews" },
+  { name: "Zibunity", path: "/zibunity" },
+  { name: "À propos", path: "/erreurs" },
+  { name: "Contact", path: "/contact" },
+];
 
 const Navbar = () => {
-    return (
-<header>
-        <nav className="navbar">
+  return (
+    <AppBar position="static">
+      <Toolbar>
+        {/* Logo */}
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           <Link href="/" passHref>
-              <Image src="/logo.png" alt="Ziboulette Logo" width={150} height={50} />
+            Ziboulette
           </Link>
-          <ul className="nav-links">
-            <li>
-              <Link href="/zibnews">Zibnews</Link>
-            </li>
-            <li>
-              <Link href="/zibunity">Zibunity</Link>
-            </li>
-            <li>
-              <Link href="/a-propos">À propos</Link>
-            </li>
-            <li>
-              <Link href="/contact">Contact</Link>
-            </li>
-          </ul>
-          <Link href="/inscription" className="cta-button" passHref>
-            Rejoignez-nous
-          </Link>
-        </nav>
-      </header>
-    )
-}
+        </Typography>
 
-export default Navbar
+        {/* Links for large screens */}
+        <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
+          {Routes.map((route, index) => (
+            <Link key={index} href={route.path} passHref>
+              {route.name}
+            </Link>
+          ))}
+        </Box>
+
+        {/* Hamburger menu for small screens */}
+        <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <HamburgerMenu routes={Routes} />
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default Navbar;

@@ -1,5 +1,5 @@
-export interface Post {
-    id: string;
+export interface IShorPost {
+    id: number;
     title: string;
     excerpt: string;
     slug: string;

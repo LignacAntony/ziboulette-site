@@ -1,125 +1,114 @@
-"use server"
-import {  NextPage } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
-import { FaFacebook, FaInstagram } from 'react-icons/fa';
-import { Post } from '../interface/Post';
-import { Product } from '../interface/Product';
-import { Testimonial } from '../interface/Testimonial';
+"use server";
+import { Box, Container, Stack } from "@mui/material";
+import { NextPage } from "next";
+import HighlightedCard from "../components/highlightedCard/HighlightedCard";
+import { IShorPost } from "../interface/IShortPost";
 
-interface HomeProps {
-  latestPosts: Post[];
-  featuredProducts: Product[];
-  testimonials: Testimonial[];
-}
-
-const Home: NextPage<HomeProps> = async () => {
-
-
-  const latestPosts: Post[] = await fetchLatestPosts();
-  const featuredProducts: Product[] = await fetchFeaturedProducts();
-  const testimonials: Testimonial[] = await fetchTestimonials();
+const Home: NextPage = async () => {
+  const latestZibnewsPosts = await fetchLatestZibnewsPosts();
+  const latestZibunityPosts = await fetchLatestZibunityPosts();
 
   return (
-      <div>
-      <main>
+    <Container>
+      <Container>
         {/* Hero Section */}
-        <section className="hero">
-          <Image
-            src="/images/hero.jpg"
-            alt="Mode de vie éco-responsable"
-            layout="responsive"
-            width={1200}
-            height={600}
-            priority
-          />
-          <div className="hero-content">
-            <h1>Adoptez un Mode de Vie Éco-Responsable avec Ziboulette</h1>
-            <p>Découvrez des astuces simples et efficaces pour un quotidien plus naturel et minimaliste.</p>
-            <Link href="/astuces" className="cta-button" passHref>
-              Découvrez Nos Astuces
-            </Link>
-          </div>
-        </section>
+        <Container>
+          <Box>
+            <h1>
+              Bienvenue sur Ziboulette : L&apos;Actualités à l&apos;Envers
+            </h1>
+            <p>
+              Ziboulette, c&apos;est le site qui vous plonge dans les coulisses
+              inattendues de l&apos;actualités. Nous vous dévoilons ces moments
+              où tout a mal tourné, où des erreurs humaines, des maladresses ou
+              des événements imprévus ont bouleversé le cours des choses. Ces
+              boulettes historiques, parfois anecdotiques, ont pourtant mené à
+              des découvertes majeures et des changements décisifs. Que ce soit
+              des inventions par accident, des échecs devenus des succès, ou des
+              événements inattendus, vous découvrirez ici l&apos;actualité sous
+              un angle unique. Partagez également vos propres boulettes dans
+              notre espace communautaire, car derrière chaque erreur peut se
+              cacher une découverte incroyable !
+            </p>
+          </Box>
+        </Container>
 
-        {/* Présentation */}
-        <section className="about">
-          <h2>Qui Sommes-Nous?</h2>
-          <p>
-            Ziboulette est dédié à promouvoir un mode de vie éco-responsable, en fournissant des astuces et des
-            ressources pour vivre de manière plus naturelle et minimaliste.
-          </p>
-        </section>
+        {/* Derniers Articles Zibnews */}
+        <Container>
+          <Box>
+            <h2>Zibnews : Quand l&apos;Actualité Dérape</h2>
+            <p>
+              Avec Zibnews, nous plongeons au cœur des événements d’aujourd’hui
+              et d’hier, où rien ne s&apos;est passé comme prévu. Qu&apos;il
+              s&apos;agisse de faux pas politiques, d&apos;erreurs
+              technologiques ou de décisions qui ont mal tourné, Zibnews vous
+              révèle ces moments où l&apos;inattendu a fait irruption dans la
+              réalité. Ces anecdotes, parfois drôles, parfois tragiques, nous
+              rappellent que le monde est rempli de surprises. Entre l’histoire
+              et l’actualité, découvrez des récits où tout bascule… pour le
+              meilleur ou pour le pire.
+            </p>
+            <Box>
+              <h3>Dernières Zibnews</h3>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 1, md: 2 }}
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flex: 1,
+                }}
+              >
+                {latestZibnewsPosts.slice(0, 3).map((post) => (
+                  <Box key={post.id}>
+                    <HighlightedCard post={post} />
+                  </Box>
+                ))}
+              </Stack>
+            </Box>
+          </Box>
+        </Container>
 
-        {/* Astuces Éco-Responsables */}
-        <section className="tips">
-          <h2>Astuces Éco-Responsables</h2>
-          <div className="tips-list">
-            {latestPosts.slice(0, 3).map((post) => (
-              <div key={post.id} className="tip">
-                <h3>{post.title}</h3>
-                <p>{post.excerpt}</p>
-                <Link href={`/astuces/${post.slug}`} passHref>
-                  Lire la suite
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Derniers Articles du Blog */}
-        <section className="latest-blogs">
-          <h2>Derniers Articles</h2>
-          <div className="blog-list">
-            {latestPosts.map((post) => (
-              <div key={post.id} className="blog-post">
-                <Image src={post.image} alt={post.title} width={400} height={300} />
-                <h3>{post.title}</h3>
-                <p>{post.excerpt}</p>
-                <Link href={`/blog/${post.slug}`} passHref>
-                  Lire la suite
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Produits en Vedette */}
-        {featuredProducts.length > 0 && (
-          <section className="featured-products">
-            <h2>Produits en Vedette</h2>
-            <div className="products-list">
-              {featuredProducts.map((product) => (
-                <div key={product.id} className="product">
-                  <Image src={product.image} alt={product.name} width={300} height={300} />
-                  <h3>{product.name}</h3>
-                  <p>{product.price}€</p>
-                  <Link href={`/boutique/${product.slug}`} passHref>
-                    Acheter
-                  </Link>
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Témoignages */}
-        <section className="testimonials">
-          <h2>Ce Que Nos Membres Disent</h2>
-          <div className="testimonial-list">
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="testimonial">
-                <p>{testimonial.quote}</p>
-                <h4>- {testimonial.name}</h4>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Derniers Posts Zibunity */}
+        <Container>
+          <Box>
+            <h2>Zibunity : Vos Mésaventures, Nos Fous Rires</h2>
+            <p>
+              Zibunity, c&apos;est l&apos;endroit où chacun peut partager ses
+              propres petites boulettes du quotidien. Parce qu&apos;on a tous
+              vécu des moments où tout semble partir en vrille, Zibunity offre
+              un espace pour raconter vos histoires de ratés, de situations
+              improbables ou de coups du sort. Que ce soit une erreur de
+              jugement hilarante ou une mésaventure imprévue, votre expérience
+              pourrait bien faire sourire (ou pleurer de rire) toute la
+              communauté !
+            </p>
+            <Box>
+              <h3>Dernières Zibunity</h3>
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={{ xs: 1, sm: 1, md: 2 }}
+                sx={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  flex: 1,
+                }}
+              >
+                {latestZibunityPosts.slice(0, 3).map((post) => (
+                  <HighlightedCard post={post} key={post.id} />
+                ))}
+              </Stack>
+            </Box>
+          </Box>
+        </Container>
 
         {/* Newsletter */}
         <section className="newsletter">
           <h2>Rejoignez Notre Newsletter</h2>
-          <p>Recevez des astuces et des nouveautés directement dans votre boîte mail.</p>
+          <p>
+            Recevez des astuces et des nouveautés directement dans votre boîte
+            mail.
+          </p>
           <form>
             <input
               type="email"
@@ -130,219 +119,72 @@ const Home: NextPage<HomeProps> = async () => {
             <button type="submit">sinscrire</button>
           </form>
         </section>
-      </main>
-
-      {/* Footer */}
-      <footer>
-        <div className="footer-links">
-          <Link href="/" passHref>
-            Accueil
-          </Link>
-          <Link href="/blog" passHref>
-            Blog
-          </Link>
-          <Link href="/boutique" passHref>
-            Boutique
-          </Link>
-          <Link href="/a-propos" passHref>
-            À propos
-          </Link>
-          <Link href="/contact" passHref>
-            Contact
-          </Link>
-        </div>
-        <div className="footer-info">
-          <p>© {new Date().getFullYear()} Ziboulette. Tous droits réservés.</p>
-          <div className="social-icons">
-            <a href="https://facebook.com/ziboulette" aria-label="Facebook">
-              <FaFacebook />
-            </a>
-            <a href="https://instagram.com/ziboulette" aria-label="Instagram">
-              <FaInstagram />
-            </a>
-            {/* Ajoutez d'autres réseaux sociaux si nécessaire */}
-          </div>
-        </div>
-      </footer>
-
-      <style >{`
-        /* Styles généraux */
-        .navbar {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 20px;
-          background-color: #fff;
-        }
-
-        .nav-links {
-          list-style: none;
-          display: flex;
-          gap: 20px;
-        }
-
-        .nav-links a {
-          text-decoration: none;
-          color: #333;
-        }
-
-        .cta-button {
-          background-color: #4caf50;
-          color: white;
-          padding: 10px 20px;
-          text-decoration: none;
-          border-radius: 5px;
-        }
-
-        .hero {
-          position: relative;
-          text-align: center;
-          color: white;
-        }
-
-        .hero-content {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-
-        .about,
-        .tips,
-        .latest-blogs,
-        .featured-products,
-        .testimonials,
-        .newsletter {
-          padding: 60px 20px;
-          text-align: center;
-        }
-
-        .tips-list,
-        .blog-list,
-        .products-list,
-        .testimonial-list {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-        }
-
-        .tip,
-        .blog-post,
-        .product,
-        .testimonial {
-          flex: 1 1 300px;
-          max-width: 300px;
-        }
-
-        .testimonial p {
-          font-style: italic;
-        }
-
-        .footer-links {
-          display: flex;
-          justify-content: center;
-          gap: 20px;
-          padding: 20px 0;
-        }
-
-        .footer-info {
-          text-align: center;
-          padding-bottom: 20px;
-        }
-
-        .social-icons a {
-          margin: 0 10px;
-          color: #333;
-          font-size: 1.5rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-          .nav-links {
-            flex-direction: column;
-            gap: 10px;
-          }
-
-          .tips-list,
-          .blog-list,
-          .products-list,
-          .testimonial-list {
-            flex-direction: column;
-            align-items: center;
-          }
-        }
-      `}</style>
-    </div>
+      </Container>
+    </Container>
   );
 };
 
-
-
-// Exemple de fonctions de récupération des données (à adapter selon votre backend ou CMS)
-async function fetchLatestPosts(): Promise<Post[]> {
+async function fetchLatestZibnewsPosts(): Promise<IShorPost[]> {
   // Remplacez par une requête API ou une lecture de fichier
   return [
     {
-      id: '1',
-      title: 'Vivre minimaliste : 5 astuces simples',
-      excerpt: 'Découvrez comment adopter un mode de vie minimaliste avec ces 5 astuces faciles à mettre en place.',
-      slug: 'vivre-minimaliste-5-astuces-simples',
-      image: '/images/post1.jpg',
+      id: 1,
+      title:
+        "Le chaos des IA génératives : l'interview qui n'aurait jamais dû avoir lieu",
+      excerpt:
+        "Lors d’un interview télévisé en direct, une intelligence artificielle censée répondre aux questions d’actualité a provoqué un véritable malaise. Au lieu de donner des réponses claires, l'IA a commencé à générer des affirmations sans fondement, mettant en cause des figures politiques et scientifiques, créant la panique sur les réseaux sociaux. L'entreprise responsable s'excuse, mais la mésaventure a ouvert le débat sur la place de l’IA dans la communication publique.",
+      slug: "chaos-ia-generatives-interview",
+      image: "/images/ia-interview.jpeg",
     },
     {
-      id: '2',
-      title: 'Comment adopter une alimentation zéro déchet',
-      excerpt: 'Apprenez à réduire vos déchets alimentaires avec ces conseils pratiques.',
-      slug: 'adopter-alimentation-zero-dechet',
-      image: '/images/post2.jpg',
+      id: 2,
+      title:
+        "Le marathon de Boston 2023 : l’erreur du panneau de signalisation",
+      excerpt:
+        "Lors du célèbre marathon de Boston, un panneau de signalisation mal placé a orienté les coureurs dans la mauvaise direction, les menant sur une route beaucoup plus longue que prévu. Des dizaines de coureurs ont perdu de précieuses minutes avant de retrouver le bon chemin. Cette erreur a mis en lumière des lacunes dans l'organisation et relancé le débat sur la sécurité des événements sportifs.",
+      slug: "marathon-boston-2023-erreur-panneau",
+      image: "/images/marathon-boston.jpeg",
     },
     {
-      id: '3',
-      title: 'DIY : Créez vos produits de beauté naturels',
-      excerpt: 'Fabriquez vos propres produits de beauté naturels avec ces recettes DIY.',
-      slug: 'diy-produits-beaute-naturels',
-      image: '/images/post3.jpg',
+      id: 3,
+      title: "Une fusée bloquée sur Terre",
+      excerpt:
+        "Lors du lancement d’une nouvelle fusée, une série d’erreurs humaines a mené à un résultat improbable : la fusée est restée clouée au sol. Le compte à rebours a défilé, les moteurs ont rugi, mais un problème mécanique l’a empêchée de décoller. Ce lancement raté a coûté des millions de dollars, mais il a aussi permis des avancées technologiques cruciales dans le domaine de la sécurité aérospatiale.",
+      slug: "fusee-bloquee-terre",
+      image: "/images/fusee.jpeg",
     },
     // Ajoutez d'autres posts si nécessaire
   ];
 }
 
-async function fetchFeaturedProducts(): Promise<Product[]> {
+async function fetchLatestZibunityPosts(): Promise<IShorPost[]> {
   // Remplacez par une requête API ou une lecture de fichier
   return [
     {
-      id: '1',
-      name: 'Savon Naturel',
-      price: 5.99,
-      slug: 'savon-naturel',
-      image: '/images/product1.jpg',
+      id: 1,
+      title: "Quand le télétravail tourne mal",
+      excerpt:
+        '"Confinement oblige, je faisais une présentation importante en visioconférence. Très concentré, je ne réalisais pas que mon chat avait grimpé sur mon bureau. Il a renversé une tasse de café directement sur mon clavier… l’ordinateur a planté et j’ai dû tout recommencer. Mes collègues en parlent encore aujourd\'hui."',
+      slug: "teletravail-tourne-mal",
+      image: "/images/ia-interview.jpeg",
     },
     {
-      id: '2',
-      name: 'Sacs Réutilisables',
-      price: 12.99,
-      slug: 'sacs-reutilisables',
-      image: '/images/product2.jpg',
-    },
-    // Ajoutez d'autres produits si nécessaire
-  ];
-}
-
-async function fetchTestimonials(): Promise<Testimonial[]> {
-  // Remplacez par une requête API ou une lecture de fichier
-  return [
-    {
-      id: '1',
-      quote: 'Ziboulette m\'a aidé à transformer mon quotidien de manière éco-responsable.',
-      name: 'Marie Dupont',
+      id: 2,
+      title: "Un GPS trop efficace",
+      excerpt:
+        '"Je suivais religieusement les instructions de mon GPS pour me rendre à un mariage. Il m\'a fait prendre un chemin étrange et je me suis retrouvé... en plein milieu d’un champ de vaches. Disons que je suis arrivé à la cérémonie en retard, et avec quelques taches de boue sur mon costume."',
+      slug: "gps-trop-efficace",
+      image: "/images/marathon-boston.jpeg",
     },
     {
-      id: '2',
-      quote: 'Les astuces proposées sont simples et efficaces. Merci Ziboulette !',
-      name: 'Jean Martin',
+      id: 3,
+      title: "L'erreur de cuisine qui sent fort",
+      excerpt:
+        "\"Je voulais impressionner ma copine avec un plat maison. J'ai suivi la recette à la lettre... sauf que j'ai confondu le sucre avec le sel. Le dessert était immangeable et elle ne cesse de me rappeler cet 'échec cuisant' dès que je mets un pied dans la cuisine.\"",
+      slug: "erreur-cuisine",
+      image: "/images/fusee.jpeg",
     },
-    // Ajoutez d'autres témoignages si nécessaire
+    // Ajoutez d'autres posts si nécessaire
   ];
 }
 
