@@ -1,39 +1,48 @@
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Typography,
+  Link,
 } from "@mui/material";
-import { IShorPost } from "../../interface/IShortPost";
+import {
+  isZibnewsPost,
+  IZibnewsPost,
+  IZibunityPost,
+} from "../../interface/IZibPost";
 import styles from "./highlightedCard.module.css";
 
-const HighlightedCard = ({ post }: { post: IShorPost }) => {
+const HighlightedCard = ({ post }: { post: IZibnewsPost | IZibunityPost }) => {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardMedia sx={{ height: 140 }} image={post.image} />
-      <CardContent sx={{ height: 140 }}>
+    <Card sx={{ flex: 1 }}>
+      {isZibnewsPost(post) && (
+        <CardMedia sx={{ height: 140 }} image={post.image} />
+      )}
+      <CardContent>
         <Typography
           gutterBottom
           variant="h5"
           component="div"
-          className={styles.limit2LinesText}
+          className={styles.limit1LinesText}
         >
           {post.title}
         </Typography>
         <Typography
-          variant="body2"
           sx={{ color: "text.secondary" }}
           className={styles.limit3LinesText}
         >
           {post.excerpt}
         </Typography>
+        <CardActions sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Link href="#" underline="hover">
+            Partager
+          </Link>
+          <Link href="#" underline="hover">
+            Lire l&apos;article
+          </Link>
+        </CardActions>
       </CardContent>
-      <CardActions>
-        <Button size="small">Partager</Button>
-        <Button size="small">Lire l&apos;article</Button>
-      </CardActions>
     </Card>
   );
 };

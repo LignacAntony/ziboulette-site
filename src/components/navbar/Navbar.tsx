@@ -7,7 +7,7 @@ const Routes: IRoute[] = [
   { name: "Accueil", path: "/" },
   { name: "Zibnews", path: "/zibnews" },
   { name: "Zibunity", path: "/zibunity" },
-  { name: "À propos", path: "/erreurs" },
+  { name: "À propos", path: "pages/about" },
   { name: "Contact", path: "/contact" },
 ];
 
@@ -25,7 +25,7 @@ const Navbar = () => {
         {/* Links for large screens */}
         <Box sx={{ display: { xs: "none", md: "flex" }, gap: 1 }}>
           {Routes.map((route, index) => (
-            <Link key={index} href={route.path} passHref>
+            <Link key={index} href={route.path}>
               {route.name}
             </Link>
           ))}
