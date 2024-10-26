@@ -1,7 +1,7 @@
 "use server";
 
 import { Box, Container } from "@mui/material";
-import { IZibnewsPost, IZibunityPost } from "../type/IZibPost";
+import { IZibnewsPost, IZibunityPost } from "../types/IZibPost";
 import HighlightedCard from "../components/highlightedCard/HighlightedCard";
 
 export default async function Home() {

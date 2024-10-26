@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-import type { Card } from "../types/card";
+import type { Card } from "../../types/card";
 
 const ZibunityClient = dynamic(() => import("./ZibunityClient"), {
   ssr: false,

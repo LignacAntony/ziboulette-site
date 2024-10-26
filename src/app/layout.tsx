@@ -1,6 +1,6 @@
-import { arvo } from "./fonts/fonts";
+import { arvo } from "../../public/fonts/fonts";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
-import "./globals.css";
+import "../styles/globals.css";
 import Navigation from "@/components/Navigation";
 import { headers } from "next/headers";
 

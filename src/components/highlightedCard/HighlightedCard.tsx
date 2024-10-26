@@ -3,7 +3,7 @@ import {
   isZibnewsPost,
   IZibnewsPost,
   IZibunityPost,
-} from "../../type/IZibPost";
+} from "../../types/IZibPost";
 
 const HighlightedCard = ({ post }: { post: IZibnewsPost | IZibunityPost }) => {
   return (
