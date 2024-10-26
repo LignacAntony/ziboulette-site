@@ -1,73 +1,63 @@
-"use client";
+import { Metadata } from "next";
+import dynamic from "next/dynamic";
+import type { Card } from "../types/card";
 
-import React, { useState } from "react";
-import { useSwipeable } from "react-swipeable";
+const ZibunityClient = dynamic(() => import("./ZibunityClient"), {
+    ssr: false,
+});
 
-interface Card {
-    id: number;
-    content: string;
-}
-
-const Zibunity: React.FC = () => {
-    const [cards, setCards] = useState<Card[]>([
-        { id: 1, content: "Carte 1: Bienvenue sur ZibUnity!" },
-        { id: 2, content: "Carte 2: Swipez pour découvrir plus!" },
-        { id: 3, content: "Carte 3: Vous pouvez ajouter vos propres cartes!" },
-    ]);
-
-    const [currentCardIndex, setCurrentCardIndex] = useState(0);
-
-    const handlers = useSwipeable({
-        onSwipedLeft: () => {
-            if (currentCardIndex < cards.length - 1) {
-                setCurrentCardIndex(currentCardIndex + 1);
-            }
-        },
-        onSwipedRight: () => {
-            if (currentCardIndex > 0) {
-                setCurrentCardIndex(currentCardIndex - 1);
-            }
-        },
-    });
-
-    const addNewCard = () => {
-        const newCard: Card = {
-            id: cards.length + 1,
-            content: `Nouvelle carte ${cards.length + 1}`,
-        };
-        setCards([...cards, newCard]);
-    };
-
-    return (
-        <div style={{ padding: "20px" }}>
-            <h1>ZibUnity</h1>
-            <div {...handlers} style={{ touchAction: "pan-y" }}>
-                <div
-                    style={{
-                        border: "1px solid black",
-                        borderRadius: "10px",
-                        padding: "20px",
-                        margin: "20px",
-                        minHeight: "150px",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontSize: "18px",
-                        textAlign: "center",
-                    }}
-                >
-                    {cards[currentCardIndex].content}
-                </div>
-            </div>
-            <p>Swipez à gauche ou à droite pour changer de carte</p>
-            <p>
-                Carte actuelle: {currentCardIndex + 1} / {cards.length}
-            </p>
-            <button onClick={addNewCard} style={{ marginTop: "20px" }}>
-                Ajouter une nouvelle carte
-            </button>
-        </div>
-    );
+export const metadata: Metadata = {
+    title: "Zibunity - Découvrez des profils",
+    description: "Swipez et trouvez des profils intéressants sur Zibunity",
 };
 
-export default Zibunity;
+const initialCards: Card[] = [
+    {
+        id: 1,
+        title: "L'assistant IA, ou l'angoisse du dev",
+        description:
+            "Aujourd'hui, j'ai tellement utilisé d'assistants IA pour mon code que je n'ai même plus l'impression de comprendre mon propre projet, Vive l'efficacité… et l'angoisse, ZIB",
+        tag: "#DevLife #Zibunity",
+        imageUrl: "/boulette.jpg",
+    },
+    {
+        id: 2,
+        title: "La peur du chat ?",
+        description:
+            "Aujourd'hui, ma livraison express de pièces pour mon PC est bloquée, La raison ? Le livreur a peur des chiens et refuse de sonner, même si j'ai un chat, VDM",
+        tag: "#TechLife #Zibunity",
+        imageUrl: "/boulette.jpg",
+    },
+    {
+        id: 3,
+        title: "L'écran partagé, piège fatal",
+        description:
+            "Aujourd'hui, lors d'une présentation en visio, je partage mon écran, Oubliant que mon groupe de discussion est ouvert, tout le monde a vu mes potes commenter mon patron, VDM",
+        tag: "#Télétravail #Zibunity",
+        imageUrl: "/boulette.jpg",
+    },
+    {
+        id: 4,
+        title: "Le café bug de l'année",
+        description:
+            "Aujourd'hui, je passe des heures sur un bug… pour découvrir que mon café renversé a éteint mon clavier, J'ai fait semblant de déboguer en vrai, VDM",
+        tag: "#VieDeDev #Zibunity",
+        imageUrl: "/boulette.jpg",
+    },
+    {
+        id: 5,
+        title: "L'IA qui vieillit les crushs",
+        description:
+            "Aujourd'hui, en voulant impressionner mon crush avec mes skills en IA, je l'ai laissée écrire son prénom dans une app pour qu'elle devine son âge, L'algorithme l'a vieillie de 10 ans, VDM",
+        tag: "#Zibunity",
+        imageUrl: "/boulette.jpg",
+    },
+];
+
+export default function ZibunityPage() {
+    return (
+        <div className="min-h-screen bg-gray-100 py-8">
+            <ZibunityClient initialCards={initialCards} />
+        </div>
+    );
+}
