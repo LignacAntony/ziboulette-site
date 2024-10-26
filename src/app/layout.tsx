@@ -5,12 +5,11 @@ import "./globals.css";
 import BottomNavBar from "@/components/BottomNavBar";
 import HeaderAppBar from "@/components/HeaderAppBar";
 
-
 export const metadata: Metadata = {
-    title: "Ziboulette",
-    description: "Comprendre l'actualité de façon ludique et accessible",
-    keywords:
-        "Ziboulette, actu ludique, articles divertissants, nouvelles décalées, boulettes amusantes, ZIB, Ziboulettes Incroyablement Bizarres, partage de boulettes, VDM"
+  title: "Ziboulette",
+  description: "Comprendre l'actualité de façon ludique et accessible",
+  keywords:
+    "Ziboulette, actu ludique, articles divertissants, nouvelles décalées, boulettes amusantes, ZIB, Ziboulettes Incroyablement Bizarres, partage de boulettes, VDM",
 };
 
 export default function RootLayout({
@@ -19,14 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <html lang="fr">
-          <body className={`${arvo.className}`}>
-              <AppRouterCacheProvider>
-				<HeaderAppBar />
-                  {children}
-				  <BottomNavBar />
-              </AppRouterCacheProvider>
-          </body>
-      </html>
+    <html lang="fr">
+      <body className={`${arvo.className}`}>
+        <AppRouterCacheProvider>
+          <HeaderAppBar />
+          {children}
+          <BottomNavBar />
+        </AppRouterCacheProvider>
+      </body>
+    </html>
   );
 }
