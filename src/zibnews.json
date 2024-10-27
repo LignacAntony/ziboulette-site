@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Le chaos des IA génératives : l'interview qui n'aurait jamais dû avoir lieu",
+    "excerpt": "Lors d’un interview télévisé en direct, une intelligence artificielle censée répondre aux questions d’actualité a provoqué un véritable malaise. Au lieu de donner des réponses claires, l'IA a commencé à générer des affirmations sans fondement, mettant en cause des figures politiques et scientifiques, créant la panique sur les réseaux sociaux. L'entreprise responsable s'excuse, mais la mésaventure a ouvert le débat sur la place de l’IA dans la communication publique.",
+    "slug": "chaos-ia-generatives-interview",
+    "image": "/images/ia-interview.jpeg"
+  },
+  {
+    "id": 2,
+    "title": "Le marathon de Boston 2023 : l’erreur du panneau de signalisation",
+    "excerpt": "Lors du célèbre marathon de Boston, un panneau de signalisation mal placé a orienté les coureurs dans la mauvaise direction, les menant sur une route beaucoup plus longue que prévu. Des dizaines de coureurs ont perdu de précieuses minutes avant de retrouver le bon chemin. Cette erreur a mis en lumière des lacunes dans l'organisation et relancé le débat sur la sécurité des événements sportifs.",
+    "slug": "marathon-boston-2023-erreur-panneau",
+    "image": "/images/marathon-boston.jpeg"
+  },
+  {
+    "id": 3,
+    "title": "Une fusée bloquée sur Terre",
+    "excerpt": "Lors du lancement d’une nouvelle fusée, une série d’erreurs humaines a mené à un résultat improbable : la fusée est restée clouée au sol. Le compte à rebours a défilé, les moteurs ont rugi, mais un problème mécanique l’a empêchée de décoller. Ce lancement raté a coûté des millions de dollars, mais il a aussi permis des avancées technologiques cruciales dans le domaine de la sécurité aérospatiale.",
+    "slug": "fusee-bloquee-terre",
+    "image": "/images/fusee.jpeg"
+  }
+]
