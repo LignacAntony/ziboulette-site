@@ -1,8 +1,16 @@
 "use server";
 
-import { Box, Container } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Container,
+  Link,
+} from "@mui/material";
 import { IZibnewsPost, IZibunityPost } from "../types/IZibPost";
 import HighlightedCard from "../components/highlightedCard/HighlightedCard";
+import zibnewsData from "../zibnews.json";
 
 export default async function Home() {
   const latestZibnewsPosts = await fetchLatestZibnewsPosts();
@@ -10,81 +18,85 @@ export default async function Home() {
 
   return (
     <Container>
-      <Container>
-        <Container>
-          <Box>
-            <h3 className="text-xl text-center mt-4">Dernières Zibnews</h3>
-            <Box className="flex gap-2 flex-col mt-4">
-              {latestZibnewsPosts.slice(0, 3).map((post) => (
-                <HighlightedCard post={post} key={post.id} />
-              ))}
-            </Box>
-          </Box>
-        </Container>
-
-        <Container>
-          <Box>
-            <h3 className="text-xl text-center mt-4">Dernières Zibunity</h3>
-            <Box className="flex gap-2 mt-4">
-              {latestZibunityPosts.slice(0, 3).map((post) => (
-                <HighlightedCard post={post} key={post.id} />
-              ))}
-            </Box>
-          </Box>
-        </Container>
-
-        <section className="newsletter">
-          <h2>Rejoignez Notre Newsletter</h2>
-          <p>
-            Recevez des astuces et des nouveautés directement dans votre boîte
-            mail.
+      <Container className="!p-0 hidden lg:block">
+        <Box className="flex flex-col items-center">
+          <h1 className="text-3xl md:text-4xl text-center mt-4 relative before:-z-10 before:absolute before:content-[''] before:w-12 before:h-12 before:rounded-full before:bg-purple-500 before:opacity-50 before:-left-5 before:-top-3">
+            Bienvenue sur Ziboulette
+          </h1>
+          <p className="text-center mt-4">
+            Découvrez les dernières Zibnews et partagez vos anecdotes sur
+            Zibunity.
           </p>
-          <form>
-            <input
-              type="email"
-              name="email"
-              placeholder="Votre email"
-              required
-            />
-            <button type="submit">sinscrire</button>
-          </form>
-        </section>
+        </Box>
       </Container>
+      <Container className="!p-0 flex flex-col md:flex-row md:gap-4">
+        <Container className="!p-0 md:flex md:flex-[2_2_0%] md:flex-col">
+          <Box className="flex flex-col items-center">
+            <h2 className="text-xl md:text-2xl text-center mt-4">À la une</h2>
+            <Box className="flex gap-4 flex-col mt-4">
+              {zibnewsData.slice(0, 1).map((post) => (
+                <Card key={post.id}>
+                  <Link
+                    href={`/zibnews/${post.slug}`}
+                    underline="none"
+                    className="!text-black"
+                  >
+                    <CardMedia image={post.image} className="w-full h-72" />
+                    <CardContent>
+                      <h3 className="text-lg md:text-2xl">{post.title}</h3>
+                    </CardContent>
+                  </Link>
+                </Card>
+              ))}
+            </Box>
+          </Box>
+          <Box>
+            <h2 className="text-xl md:text-2xl text-center mt-4">
+              Dernières Zibnews
+            </h2>
+            <Box className="flex gap-4 flex-col mt-4">
+              {latestZibnewsPosts.slice(1, 3).map((post) => (
+                <HighlightedCard post={post} key={post.id} />
+              ))}
+            </Box>
+          </Box>
+        </Container>
+
+        <Container className="!p-0 md:flex-1">
+          <Box>
+            <h2 className="text-xl md:text-2xl text-center mt-4">
+              Dernières Zibunity
+            </h2>
+            <Box className="flex gap-4 flex-row flex-wrap mt-4">
+              {latestZibunityPosts.slice(0, 3).map((post) => (
+                <HighlightedCard
+                  post={post}
+                  key={post.id}
+                  className="flex-[40%] md:flex-[100%]"
+                />
+              ))}
+            </Box>
+          </Box>
+        </Container>
+      </Container>
+      <section className="newsletter">
+        <h2>Rejoignez Notre Newsletter</h2>
+        <p>
+          Recevez des astuces et des nouveautés directement dans votre boîte
+          mail.
+        </p>
+        <form>
+          <input type="email" name="email" placeholder="Votre email" required />
+          <button type="submit">sinscrire</button>
+        </form>
+      </section>
     </Container>
   );
 }
 
 async function fetchLatestZibnewsPosts(): Promise<IZibnewsPost[]> {
   // Remplacez par une requête API ou une lecture de fichier
-  return [
-    {
-      id: 1,
-      title:
-        "Le chaos des IA génératives : l'interview qui n'aurait jamais dû avoir lieu",
-      excerpt:
-        "Lors d’un interview télévisé en direct, une intelligence artificielle censée répondre aux questions d’actualité a provoqué un véritable malaise. Au lieu de donner des réponses claires, l'IA a commencé à générer des affirmations sans fondement, mettant en cause des figures politiques et scientifiques, créant la panique sur les réseaux sociaux. L'entreprise responsable s'excuse, mais la mésaventure a ouvert le débat sur la place de l’IA dans la communication publique.",
-      slug: "chaos-ia-generatives-interview",
-      image: "/images/ia-interview.jpeg",
-    },
-    {
-      id: 2,
-      title:
-        "Le marathon de Boston 2023 : l’erreur du panneau de signalisation",
-      excerpt:
-        "Lors du célèbre marathon de Boston, un panneau de signalisation mal placé a orienté les coureurs dans la mauvaise direction, les menant sur une route beaucoup plus longue que prévu. Des dizaines de coureurs ont perdu de précieuses minutes avant de retrouver le bon chemin. Cette erreur a mis en lumière des lacunes dans l'organisation et relancé le débat sur la sécurité des événements sportifs.",
-      slug: "marathon-boston-2023-erreur-panneau",
-      image: "/images/marathon-boston.jpeg",
-    },
-    {
-      id: 3,
-      title: "Une fusée bloquée sur Terre",
-      excerpt:
-        "Lors du lancement d’une nouvelle fusée, une série d’erreurs humaines a mené à un résultat improbable : la fusée est restée clouée au sol. Le compte à rebours a défilé, les moteurs ont rugi, mais un problème mécanique l’a empêchée de décoller. Ce lancement raté a coûté des millions de dollars, mais il a aussi permis des avancées technologiques cruciales dans le domaine de la sécurité aérospatiale.",
-      slug: "fusee-bloquee-terre",
-      image: "/images/fusee.jpeg",
-    },
-    // Ajoutez d'autres posts si nécessaire
-  ];
+  return zibnewsData;
 }
 
 async function fetchLatestZibunityPosts(): Promise<IZibunityPost[]> {
