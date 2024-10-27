@@ -18,7 +18,7 @@ export default function RootLayout({
       <body className={`${arvo.className}`}>
         <AppRouterCacheProvider>
           <Navigation pathname={pathname} />
-          <main className="lg:pl-64 md:pl-12 pb-16 md:pb-0">{children}</main>
+          <main className="lg:pl-64 md:pl-12 pb-16 md:pb-0 min-h-screen bg-gray-100">{children}</main>
         </AppRouterCacheProvider>
       </body>
     </html>
