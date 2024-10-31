@@ -1,15 +1,18 @@
 export interface IZibnewsPost {
     id: number;
     title: string;
-    excerpt: string;
+    content: string;
+    shortContent: string;
     slug: string;
     image: string;
+    date: string;
+    category: string;
 }
 
 export interface IZibunityPost {
     id: number;
     title: string;
-    excerpt: string;
+    content: string;
     slug: string;
 }
 

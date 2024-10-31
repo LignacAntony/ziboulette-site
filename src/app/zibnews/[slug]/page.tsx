@@ -1,3 +1,4 @@
+import { Container } from "@mui/material";
 import { IZibnewsPost } from "../../../types/IZibPost";
 import zibnewsData from "../../../zibnews.json";
 import Image from "next/image";
@@ -10,27 +11,29 @@ const postZibNews = async ({ params }: Params) => {
   const { slug } = params;
   const post: IZibnewsPost = await fetchZibnewsPosts(slug);
   return (
-    <article>
-      <header>
-        <h1 className="text-3xl md:text-4xl text-center mt-4">{post.title}</h1>
-        <time>27 Octobre 2024</time>
-        <address>
-          Par <a href="/auteur">Anto</a>
-        </address>
-        <meta content="Description courte de l'article" />
-      </header>
-      <figure>
-        <Image src={post.image} alt={post.title} width={600} height={400} />
-      </figure>
-      <div>
-        <p>{post.excerpt}</p>
-      </div>
-      <footer>
+    <Container>
+      <article>
+        <header>
+          <h1 className="text-3xl md:text-4xl text-left mt-4">{post.title}</h1>
+          <time>{post.date}</time>
+          <address>
+            Par <a href="/auteur">Anto</a>
+          </address>
+          <meta content={post.shortContent} />
+        </header>
+        <figure>
+          <Image src={post.image} alt={post.title} width={600} height={400} />
+        </figure>
         <div>
-          <a href="/tag/zibnews">Zibnews</a>
+          <p className="text-base">{post.content}</p>
         </div>
-      </footer>
-    </article>
+        <footer>
+          <div>
+            <a href="/tag/zibnews">Zibnews</a>
+          </div>
+        </footer>
+      </article>
+    </Container>
   );
 };
 
