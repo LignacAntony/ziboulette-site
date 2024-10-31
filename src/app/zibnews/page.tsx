@@ -1,39 +1,28 @@
 "use server";
 
+import { Box, Container } from "@mui/material";
 import React from "react";
-
-interface NewsItem {
-  id: number;
-  title: string;
-  content: string;
-}
+import zibnewsData from "../../zibnews.json";
+import HighlightedCard from "../../components/highlightedCard/HighlightedCard";
 
 const Zibnews: React.FC = () => {
-  // Ceci est un exemple de données, vous devrez les remplacer par une vraie API
-  const newsItems: NewsItem[] = [
-    {
-      id: 1,
-      title: "Première actualité",
-      content: "Contenu de la première actualité...",
-    },
-    {
-      id: 2,
-      title: "Deuxième actualité",
-      content: "Contenu de la deuxième actualité...",
-    },
-    // Ajoutez plus d'actualités ici
-  ];
-
   return (
-    <div>
-      <h1>ZibNews</h1>
-      {newsItems.map((item) => (
-        <div key={item.id}>
-          <h2>{item.title}</h2>
-          <p>{item.content}</p>
-        </div>
-      ))}
-    </div>
+    <Container>
+      <Container className="!p-0 flex flex-col md:flex-row md:gap-4">
+        <Container className="!p-0 md:flex md:flex-[2_2_0%] md:flex-col">
+          <Box>
+            <h2 className="text-xl md:text-2xl text-center mt-4">
+              Dernières Zibnews
+            </h2>
+            <Box className="flex gap-4 flex-col mt-4">
+              {zibnewsData.slice(0, 1000).map((post) => (
+                <HighlightedCard post={post} key={post.id} />
+              ))}
+            </Box>
+          </Box>
+        </Container>
+      </Container>
+    </Container>
   );
 };
 

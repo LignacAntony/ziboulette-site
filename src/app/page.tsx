@@ -105,21 +105,21 @@ async function fetchLatestZibunityPosts(): Promise<IZibunityPost[]> {
     {
       id: 1,
       title: "Quand le télétravail tourne mal",
-      excerpt:
+      content:
         '"Confinement oblige, je faisais une présentation importante en visioconférence. Très concentré, je ne réalisais pas que mon chat avait grimpé sur mon bureau. Il a renversé une tasse de café directement sur mon clavier… l’ordinateur a planté et j’ai dû tout recommencer. Mes collègues en parlent encore aujourd\'hui."',
       slug: "teletravail-tourne-mal",
     },
     {
       id: 2,
       title: "Un GPS trop efficace",
-      excerpt:
+      content:
         '"Je suivais religieusement les instructions de mon GPS pour me rendre à un mariage. Il m\'a fait prendre un chemin étrange et je me suis retrouvé... en plein milieu d’un champ de vaches. Disons que je suis arrivé à la cérémonie en retard, et avec quelques taches de boue sur mon costume."',
       slug: "gps-trop-efficace",
     },
     {
       id: 3,
       title: "L'erreur de cuisine qui sent fort",
-      excerpt:
+      content:
         "\"Je voulais impressionner ma copine avec un plat maison. J'ai suivi la recette à la lettre... sauf que j'ai confondu le sucre avec le sel. Le dessert était immangeable et elle ne cesse de me rappeler cet 'échec cuisant' dès que je mets un pied dans la cuisine.\"",
       slug: "erreur-cuisine",
     },
