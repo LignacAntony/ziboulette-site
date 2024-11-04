@@ -63,7 +63,7 @@ export default function QuiSommesNous() {
                   Nos Valeurs
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                  <div className="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300">
+                  <div className="bg-zib-light-gray rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300">
                       <h3 className="text-xl font-bold text-primary mb-3">
                           Accessibilité
                       </h3>
@@ -71,7 +71,7 @@ export default function QuiSommesNous() {
                           L&apos;information claire et compréhensible pour tous
                       </p>
                   </div>
-                  <div className="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300">
+                  <div className="bg-zib-light-gray rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300">
                       <h3 className="text-xl font-bold text-primary mb-3">
                           Ludique
                       </h3>
@@ -80,7 +80,7 @@ export default function QuiSommesNous() {
                           d&apos;humour
                       </p>
                   </div>
-                  <div className="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300">
+                  <div className="bg-zib-light-gray rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300">
                       <h3 className="text-xl font-bold text-primary mb-3">
                           Communauté
                       </h3>
@@ -88,7 +88,7 @@ export default function QuiSommesNous() {
                           Un espace bienveillant de partage
                       </p>
                   </div>
-                  <div className="bg-gray-50 rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300">
+                  <div className="bg-zib-light-gray rounded-lg p-6 text-center hover:shadow-md transition-shadow duration-300">
                       <h3 className="text-xl font-bold text-primary mb-3">
                           Qualité
                       </h3>
@@ -105,11 +105,11 @@ export default function QuiSommesNous() {
                   L&apos;Équipe
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="bg-gray-50 rounded-lg p-8 text-center hover:-translate-y-1 transition-transform duration-300">
+                  <div className="bg-zib-light-gray rounded-lg p-8 text-center hover:-translate-y-1 transition-transform duration-300">
                       <h3 className="text-2xl font-bold text-primary mb-2">
                           Antony Lignac
                       </h3>
-                      <p className="text-lg font-semibold text-gray-600 mb-2">
+                      <p className="text-lg font-semibold mb-2">
                           Co-fondateur
                       </p>
                       <p className="text-primary font-medium italic mb-4">
@@ -121,11 +121,11 @@ export default function QuiSommesNous() {
                           accessible et engageant.
                       </p>
                   </div>
-                  <div className="bg-gray-50 rounded-lg p-8 text-center hover:-translate-y-1 transition-transform duration-300">
+                  <div className="bg-zib-light-gray rounded-lg p-8 text-center hover:-translate-y-1 transition-transform duration-300">
                       <h3 className="text-2xl font-bold text-primary mb-2">
                           Marilyne Leam
                       </h3>
-                      <p className="text-lg font-semibold text-gray-600 mb-2">
+                      <p className="text-lg font-semibold mb-2">
                           Co-fondatrice
                       </p>
                       <p className="text-primary font-medium italic mb-4">
