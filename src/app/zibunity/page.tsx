@@ -56,7 +56,8 @@ const initialCards: Card[] = [
 
 export default function ZibunityPage() {
   return (
-    <div className="min-h-screen bg-gray-100 py-8">
+    <div className="p-8">
+		<h1 className="text-3xl font-bold mb-8">Zibunity</h1>
       <ZibunityClient initialCards={initialCards} />
     </div>
   );

@@ -1,7 +1,10 @@
+"use client"
+
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Home, Newspaper, Users, Info, Heart, PlusSquare } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 interface NavigationItem {
   name: string;
@@ -9,11 +12,7 @@ interface NavigationItem {
   href: string;
 }
 
-interface NavigationProps {
-  pathname: string;
-}
-
-export default function Navigation({ pathname }: NavigationProps) {
+export default function Navigation() {
   const navigationItems: NavigationItem[] = [
     { name: "Accueil", icon: Home, href: "/" },
     { name: "Zibnews", icon: Newspaper, href: "/zibnews" },
@@ -22,6 +21,7 @@ export default function Navigation({ pathname }: NavigationProps) {
     { name: "Qui sommes-nous", icon: Info, href: "/qui-sommes-nous" },
   ];
 
+    const pathname = usePathname(); 
   return (
     <>
       {/* Header Mobile */}
@@ -65,17 +65,15 @@ export default function Navigation({ pathname }: NavigationProps) {
         <div className="flex justify-around items-center h-16">
           {navigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+			const isActive = pathname === item.href;
             return (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex flex-col items-center justify-center w-full h-full ${
-                  isActive ? "text-[#0d00e6]" : "text-[#595959]"
-                }`}
+                className={`flex flex-col items-center justify-center w-full h-full ${isActive ? 'text-primary' : 'text-gray-800'}`}
               >
                 <Icon
-                  className={`w-6 h-6 ${isActive ? "text-[#0d00e6]" : "text-[#595959]"}`}
+                  className={`w-6 h-6`}
                 />
               </Link>
             );
@@ -101,7 +99,7 @@ export default function Navigation({ pathname }: NavigationProps) {
         <div className="flex-1 flex flex-col items-center pt-8 space-y-6">
           {navigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+
             return (
               <Link
                 key={item.name}
@@ -109,12 +107,12 @@ export default function Navigation({ pathname }: NavigationProps) {
                 className={`
                                     relative group flex items-center justify-center 
                                     w-12 h-12 rounded-xl transition-all duration-200
-                                    ${isActive ? "bg-blue-50" : "hover:bg-gray-100"}
+                                   
                                 `}
               >
                 <Icon
                   className={`w-6 h-6 transition-colors duration-200
-                                        ${isActive ? "text-[#0d00e6]" : "text-gray-500 group-hover:text-[#0d00e6]"}
+                                       
                                     `}
                 />
                 {/* Tooltip */}
@@ -143,24 +141,18 @@ export default function Navigation({ pathname }: NavigationProps) {
         <div className="flex flex-col space-y-2">
           {navigationItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+			const isActive = pathname === item.href; 
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`flex items-center space-x-4 px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors duration-200 ${
-                  isActive ? "text-[#0d00e6]" : "text-[#595959]"
-                }`}
-              >
-                <Icon
-                  className={`w-6 h-6 ${isActive ? "text-[#0d00e6]" : "text-[#595959]"}`}
-                />
-                <span
-                  className={isActive ? "text-[#0d00e6]" : "text-[#595959]"}
+                <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`flex items-center space-x-4 px-4 py-3 rounded-lg hover:bg-zib-light-gray transition-colors duration-200 ${
+                            isActive ? 'text-primary' : 'text-gray-800'
+					}`}
                 >
-                  {item.name}
-                </span>
-              </Link>
+                    <Icon className={`w-6 h-6`} />
+                    <span>{item.name}</span>
+                </Link>
             );
           })}
         </div>

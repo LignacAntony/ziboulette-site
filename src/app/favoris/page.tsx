@@ -16,7 +16,7 @@ export default function FavorisPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="p-8">
       <h1 className="text-3xl font-bold mb-8">Mes Favoris</h1>
 
       {favorites.length === 0 ? (
