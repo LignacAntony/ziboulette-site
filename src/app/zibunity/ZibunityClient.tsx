@@ -10,7 +10,9 @@ interface ZibunityClientProps {
 }
 
 export default function ZibunityClient({ initialCards }: ZibunityClientProps) {
-  const [cards, setCards] = useState<Card[]>(initialCards);
+  // const [cards, setCards] = useState<Card[]>(initialCards);
+  const cards: Card[] = initialCards;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState<Card[]>([]);
   const router = useRouter();

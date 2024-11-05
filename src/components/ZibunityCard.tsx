@@ -19,34 +19,34 @@ export default function ZibunityCard({
   onSwipeRight,
   isLast,
 }: ZibunityCardProps) {
-  const [swipeDirection, setSwipeDirection] = React.useState<
-    "left" | "right" | null
-  >(null);
-  const [startX, setStartX] = React.useState(0);
+  // const [swipeDirection, setSwipeDirection] = React.useState<
+  //   "left" | "right" | null
+  // >(null);
+  // const [startX, setStartX] = React.useState(0);
   const [offsetX, setOffsetX] = React.useState(0);
 
   const handlers = useSwipeable({
-    onSwipeStart: (event) => {
-      setStartX(event.initial[0]);
-    },
+    // onSwipeStart: (event) => {
+    //   setStartX(event.initial[0]);
+    // },
     onSwiping: (event) => {
       setOffsetX(event.deltaX);
     },
     onSwipedLeft: () => {
-      setSwipeDirection("left");
+      // setSwipeDirection("left");
       setOffsetX(-1000);
       setTimeout(() => {
         onSwipeLeft();
-        setSwipeDirection(null);
+        // setSwipeDirection(null);
         setOffsetX(0);
       }, 200);
     },
     onSwipedRight: () => {
-      setSwipeDirection("right");
+      // setSwipeDirection("right");
       setOffsetX(1000);
       setTimeout(() => {
         onSwipeRight();
-        setSwipeDirection(null);
+        // setSwipeDirection(null);
         setOffsetX(0);
       }, 200);
     },
